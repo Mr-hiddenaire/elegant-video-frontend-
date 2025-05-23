@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../pages/home/home_page.dart';
 import '../../pages/auth/login_page.dart';
 

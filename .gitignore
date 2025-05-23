@@ -1,5 +1,7 @@
-node_modules/
+.dart_tool/
+.packages
+.pub-cache/
 build/
-.env
 .idea/
-*.log
+*.iml
+.env
