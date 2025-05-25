@@ -3,11 +3,10 @@ import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class VideoPage extends StatefulWidget {
   final String videoUrl;
-
-  const VideoPage({Key? key, required this.videoUrl}) : super(key: key);
+  const VideoPage({super.key, required this.videoUrl});
 
   @override
-  _VideoPageState createState() => _VideoPageState();
+  State<VideoPage> createState() => _VideoPageState();
 }
 
 class _VideoPageState extends State<VideoPage> {
@@ -16,9 +15,6 @@ class _VideoPageState extends State<VideoPage> {
   @override
   void initState() {
     super.initState();
-
-    final isHls = widget.videoUrl.toLowerCase().endsWith('.m3u8');
-
     _vlcController = VlcPlayerController.network(
       widget.videoUrl,
       hwAcc: HwAcc.full,
@@ -36,7 +32,7 @@ class _VideoPageState extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("播放视频")),
+      appBar: AppBar(title: const Text("播放视频")),
       body: Column(
         children: [
           AspectRatio(
@@ -44,11 +40,11 @@ class _VideoPageState extends State<VideoPage> {
             child: VlcPlayer(
               controller: _vlcController,
               aspectRatio: 16 / 9,
-              placeholder: Center(child: CircularProgressIndicator()),
+              placeholder: const Center(child: CircularProgressIndicator()),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+          const Padding(
+            padding: EdgeInsets.all(12.0),
             child: Text("推荐视频",
                 style: TextStyle(color: Colors.white, fontSize: 18)),
           ),
@@ -58,9 +54,9 @@ class _VideoPageState extends State<VideoPage> {
               itemBuilder: (_, index) {
                 return ListTile(
                   title: Text("推荐视频 \${index + 1}",
-                      style: TextStyle(color: Colors.white)),
+                      style: const TextStyle(color: Colors.white)),
                   subtitle: Text("播放量: \${(index + 1) * 1000}",
-                      style: TextStyle(color: Colors.white70)),
+                      style: const TextStyle(color: Colors.white70)),
                   tileColor: Colors.grey[900],
                   onTap: () {},
                 );
