@@ -8,31 +8,21 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("首页")),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                context.go('/login');
-              },
-              child: const Text("前往登录"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.go('/register');
-              },
-              child: const Text("前往登录"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                final videoUrl = Uri.encodeComponent("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8");
-                context.go('/video?url=$videoUrl');
-              },
-              child: const Text("播放视频"),
-            ),
-          ],
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              final url = Uri.encodeComponent("https://www.w3schools.com/html/mov_bbb.mp4");
+              context.go("/video?url=$url");
+            },
+            child: const Text("播放视频"),
+          ),
+          ElevatedButton(onPressed: () => context.go('/login'), child: const Text("登录")),
+          ElevatedButton(onPressed: () => context.go('/register'), child: const Text("注册")),
+          ElevatedButton(onPressed: () => context.go('/account'), child: const Text("用户中心")),
+          ElevatedButton(onPressed: () => context.go('/subscribe'), child: const Text("订阅管理")),
+        ],
       ),
     );
   }

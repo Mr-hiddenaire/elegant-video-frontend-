@@ -1,5 +1,5 @@
-name: elegant_video_full
-description: 视频站完整 Demo：支持登录、播放、路由跳转
+name: elegant_video_web_ready
+description: 修复视频播放 + 页面跳转 + Web 可部署支持
 version: 1.0.0+1
 
 environment:
@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^10.1.2
-  flutter_vlc_player: ^7.2.0
+  video_player: ^2.7.0
 
 flutter:
   uses-material-design: true
