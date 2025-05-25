@@ -9,8 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  better_player:
+    git:
+      url: https://github.com/furkanaskin/betterplayer_fork.git
+      ref: main
   go_router: ^15.1.2
-  better_player: ^0.0.83
 
 dev_dependencies:
   flutter_test:
