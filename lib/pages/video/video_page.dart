@@ -1,69 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:better_player/better_player.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class VideoPage extends StatefulWidget {
+  final String videoUrl;
+
+  const VideoPage({Key? key, required this.videoUrl}) : super(key: key);
+
   @override
   _VideoPageState createState() => _VideoPageState();
 }
 
 class _VideoPageState extends State<VideoPage> {
-  late BetterPlayerController _betterPlayerController;
+  late VlcPlayerController _vlcController;
 
   @override
   void initState() {
     super.initState();
 
-    BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-      BetterPlayerDataSourceType.network,
-      "https://example.com/video/master.m3u8",
-      videoFormat: BetterPlayerVideoFormat.hls,
-      resolutions: {
-        "480p": "https://example.com/video-480p.mp4",
-        "720p": "https://example.com/video-720p.mp4",
-        "1080p": "https://example.com/video-1080p.mp4",
-      },
-    );
+    final isHls = widget.videoUrl.toLowerCase().endsWith('.m3u8');
 
-    _betterPlayerController = BetterPlayerController(
-      BetterPlayerConfiguration(
-        aspectRatio: 16 / 9,
-        autoPlay: true,
-        controlsConfiguration: BetterPlayerControlsConfiguration(
-          enableQualities: true,
-          enablePlaybackSpeed: true,
-        ),
-      ),
-      betterPlayerDataSource: dataSource,
+    _vlcController = VlcPlayerController.network(
+      widget.videoUrl,
+      hwAcc: HwAcc.full,
+      autoPlay: true,
+      options: VlcPlayerOptions(),
     );
   }
 
   @override
   void dispose() {
-    _betterPlayerController.dispose();
+    _vlcController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("视频播放")),
+      appBar: AppBar(title: Text("播放视频")),
       body: Column(
         children: [
           AspectRatio(
             aspectRatio: 16 / 9,
-            child: BetterPlayer(controller: _betterPlayerController),
+            child: VlcPlayer(
+              controller: _vlcController,
+              aspectRatio: 16 / 9,
+              placeholder: Center(child: CircularProgressIndicator()),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Text("推荐视频", style: TextStyle(color: Colors.white, fontSize: 18)),
+            child: Text("推荐视频",
+                style: TextStyle(color: Colors.white, fontSize: 18)),
           ),
           Expanded(
             child: ListView.builder(
               itemCount: 5,
               itemBuilder: (_, index) {
                 return ListTile(
-                  title: Text("推荐视频 ${index + 1}", style: TextStyle(color: Colors.white)),
-                  subtitle: Text("播放量: ${(index + 1) * 1000}", style: TextStyle(color: Colors.white70)),
+                  title: Text("推荐视频 \${index + 1}",
+                      style: TextStyle(color: Colors.white)),
+                  subtitle: Text("播放量: \${(index + 1) * 1000}",
+                      style: TextStyle(color: Colors.white70)),
                   tileColor: Colors.grey[900],
                   onTap: () {},
                 );
