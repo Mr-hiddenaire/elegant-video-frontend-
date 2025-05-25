@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
-import '../../pages/home/home_page.dart';
+import '../../pages/account/account_page.dart';
 import '../../pages/auth/login_page.dart';
-import '../../pages/video/video_page.dart';
 import '../../pages/auth/register_page.dart';
+import '../../pages/home/home_page.dart';
+import '../../pages/video/video_page.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -11,6 +12,8 @@ class AppRouter {
       GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
       GoRoute(
           path: '/register', builder: (context, state) => const RegisterPage()),
+      GoRoute(
+          path: '/account', builder: (context, state) => const AccountPage()),
       GoRoute(
         path: '/video',
         builder: (context, state) {
