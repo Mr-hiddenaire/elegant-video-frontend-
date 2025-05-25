@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^10.0.0
+  go_router: ^15.1.2
+  better_player: ^0.0.83
 
 dev_dependencies:
   flutter_test:
